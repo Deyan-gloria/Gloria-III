@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.5);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+body {
+  background: url('assets/img/fondo_gloria.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.busqueda {
+  margin: 20px 0;
+}
+
+.busqueda input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.busqueda button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #007BFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: rgba(255,255,255,0.1);
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  color: #fff;
+}
