@@ -4,35 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagos - GLORIA III</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <div class="overlay">
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="propietarios.html">Propietarios</a></li>
-        <li><a href="pagos.html">Pagos</a></li>
-        <li><a href="vehiculos.html">Vehículos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-    <main>
-      <h1>Pagos</h1>
-      <div class="busqueda">
-        <input type="text" id="searchPagos" placeholder="Buscar por nombre, apartamento, torre o cédula">
-        <button onclick="buscar('Pagos')"><i class="fa fa-search"></i></button>
-      </div>
-      <table id="tablaPagos">
-        <thead><tr><th>Concepto</th><th>Nombre</th><th>Apartamento</th><th>Estado</th></tr></thead>
-        <tbody>
-          <tr><td>Administración</td><td>Juan Pérez</td><td>101</td><td>Al día</td></tr>
-          <tr><td>Parqueo</td><td>María Gómez</td><td>202</td><td>Pendiente</td></tr>
-        </tbody>
-      </table>
-    </main>
-  </div>
+  <header>
+    <h1>Gestión de Pagos</h1>
+    <button onclick="window.location.href='index.html'">🏠 Volver</button>
+  </header>
+
+  <!-- 📋 Formulario de Deudas (solo para Administrador) -->
+  <section class="formulario" id="formPagos" style="display:none;">
+    <h2>Registrar Deuda / Pago</h2>
+    <form id="pagosForm">
+      <input type="text" id="nombrePago" placeholder="Nombre residente" required>
+      <input type="text" id="torrePago" placeholder="Torre">
+      <input type="text" id="apartamentoPago" placeholder="Apartamento">
+
+      <label for="asuntoPago"><b>Asunto:</b></label>
+      <select id="asuntoPago" required>
+        <option value="">Seleccione...</option>
+        <option value="Administración">Administración</option>
+        <option value="Parqueadero">Parqueadero</option>
+        <option value="Multa">Multa</option>
+        <option value="Otro">Otro</option>
+      </select>
+
+      <input type="date" id="fechaPago" required>
+      <input type="number" id="valorPago" placeholder="Valor $" required>
+
+      <label for="estadoPago"><b>Estado:</b></label>
+      <select id="estadoPago" required>
+        <option value="Pendiente">Pendiente</option>
+        <option value="Pagado">Pagado</option>
+      </select>
+
+      <button type="submit">💾 Guardar</button>
+    </form>
+  </section>
+
+  <!-- 📊 Tabla de Pagos -->
+  <section class="tabla">
+    <h2>Historial de Pagos y Deudas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Torre</th>
+          <th>Apartamento</th>
+          <th>Asunto</th>
+          <th>Fecha</th>
+          <th>Valor</th>
+          <th>Estado</th>
+          <th class="admin-only">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="pagosTablaBody">
+        <!-- Se llenará dinámicamente -->
+      </tbody>
+    </table>
+  </section>
 </body>
 </html>
