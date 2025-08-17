@@ -4,24 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GLORIA III - Inicio</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
 </head>
-<body>
-  <div class="overlay">
-    <nav>
-      <ul>
-        <li><a href="index.html"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="propietarios.html"><i class="fa fa-users"></i> Propietarios</a></li>
-        <li><a href="pagos.html"><i class="fa fa-credit-card"></i> Pagos</a></li>
-        <li><a href="vehiculos.html"><i class="fa fa-car"></i> Vehículos</a></li>
-        <li><a href="contacto.html"><i class="fa fa-envelope"></i> Contacto</a></li>
-      </ul>
-    </nav>
-    <main>
-      <h1>Bienvenido a GLORIA III</h1>
-      <p>Sistema de gestión residencial</p>
-    </main>
+<body class="fondo">
+
+  <div class="login-container">
+    <h1>GLORIA III</h1>
+    <p>Seleccione su rol para ingresar</p>
+
+    <form id="loginForm">
+      <label for="role">Rol:</label>
+      <select id="role" name="role">
+        <option value="admin">Administrador</option>
+        <option value="vigilancia">Vigilancia</option>
+      </select>
+      
+      <button type="submit">Ingresar</button>
+    </form>
   </div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
