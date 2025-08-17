@@ -1,161 +1,185 @@
-// ====== Manejo de Roles en Login ======
-function login() {
-  const rol = document.getElementById("rol").value;
+// ==========================
+// Login con Roles
+// ==========================
+const usuarios = [
+  { usuario: "admin", password: "1234", rol: "Administrador" },
+  { usuario: "vigilante", password: "1234", rol: "Vigilancia" }
+];
 
-  if (rol === "admin") {
-    localStorage.setItem("rol", "admin");
+function login(event) {
+  event.preventDefault();
+  const user = document.getElementById("usuario").value;
+  const pass = document.getElementById("password").value;
+
+  const encontrado = usuarios.find(u => u.usuario === user && u.password === pass);
+
+  if (encontrado) {
+    localStorage.setItem("rol", encontrado.rol);
+    window.location.href = "index.html";
   } else {
-    localStorage.setItem("rol", "vigilancia");
+    alert("Usuario o contraseña incorrectos");
   }
-
-  // Redirige al módulo de residentes
-  window.location.href = "residentes.html";
 }
 
-// ====== Funciones CRUD ======
+// ==========================
+// Función para verificar rol
+// ==========================
+function getRol() {
+  return localStorage.getItem("rol") || "Vigilancia";
+}
 
-// Estructura inicial de residentes
+// ==========================
+// CRUD Residentes-Vehículos
+// ==========================
 let residentes = JSON.parse(localStorage.getItem("residentes")) || [];
 
-// Renderiza tabla
-function renderTable() {
-  const tbody = document.querySelector("#tabla-residentes tbody");
-  tbody.innerHTML = "";
+function mostrarResidentes() {
+  const tabla = document.getElementById("tablaResidentes");
+  if (!tabla) return;
 
+  tabla.innerHTML = "";
   residentes.forEach((residente, index) => {
-    let row = `
+    let fila = `
       <tr>
-        <td>${residente.cedula}</td>
         <td>${residente.nombre}</td>
+        <td>${residente.cedula}</td>
         <td>${residente.torre}</td>
         <td>${residente.apartamento}</td>
         <td>${residente.tipo}</td>
-        <td>${residente.vehiculo}</td>
         <td>${residente.placa}</td>
-        <td>${residente.propietario}</td>
+        <td>${residente.condicion}</td>
+        ${getRol() === "Administrador" ? `
         <td>
-          <div class="actions">
-            <button class="edit" onclick="editResidente(${index})">✏️</button>
-            <button class="delete" onclick="deleteResidente(${index})">🗑️</button>
-          </div>
-        </td>
+          <button onclick="editarResidente(${index})">Editar</button>
+          <button onclick="eliminarResidente(${index})">Eliminar</button>
+        </td>` : ""}
       </tr>
     `;
-    tbody.innerHTML += row;
+    tabla.innerHTML += fila;
   });
-
-  aplicarRol();
 }
 
-// Agregar residente
-function addResidente() {
-  const cedula = document.getElementById("cedula").value;
-  const nombre = document.getElementById("nombre").value;
-  const torre = document.getElementById("torre").value;
-  const apartamento = document.getElementById("apartamento").value;
-  const tipo = document.getElementById("tipo").value;
-  const vehiculo = document.getElementById("vehiculo").value;
-  const placa = document.getElementById("placa").value;
-  const propietario = document.getElementById("propietario").value;
-
-  if (!cedula || !nombre || !torre || !apartamento) {
-    alert("Por favor completa los campos obligatorios.");
+function agregarResidente(event) {
+  event.preventDefault();
+  if (getRol() !== "Administrador") {
+    alert("Solo el administrador puede agregar residentes.");
     return;
   }
 
-  residentes.push({ cedula, nombre, torre, apartamento, tipo, vehiculo, placa, propietario });
+  const nuevo = {
+    nombre: document.getElementById("nombre").value,
+    cedula: document.getElementById("cedula").value,
+    torre: document.getElementById("torre").value,
+    apartamento: document.getElementById("apartamento").value,
+    tipo: document.getElementById("tipo").value,
+    placa: document.getElementById("placa").value,
+    condicion: document.getElementById("condicion").value
+  };
+
+  residentes.push(nuevo);
   localStorage.setItem("residentes", JSON.stringify(residentes));
-  renderTable();
-  limpiarFormulario();
+  mostrarResidentes();
+  document.getElementById("formResidentes").reset();
 }
 
-// Editar residente
-function editResidente(index) {
+function editarResidente(index) {
   const r = residentes[index];
-
-  document.getElementById("cedula").value = r.cedula;
   document.getElementById("nombre").value = r.nombre;
+  document.getElementById("cedula").value = r.cedula;
   document.getElementById("torre").value = r.torre;
   document.getElementById("apartamento").value = r.apartamento;
   document.getElementById("tipo").value = r.tipo;
-  document.getElementById("vehiculo").value = r.vehiculo;
   document.getElementById("placa").value = r.placa;
-  document.getElementById("propietario").value = r.propietario;
+  document.getElementById("condicion").value = r.condicion;
 
-  deleteResidente(index);
+  eliminarResidente(index);
 }
 
-// Eliminar residente
-function deleteResidente(index) {
+function eliminarResidente(index) {
+  if (getRol() !== "Administrador") {
+    alert("Solo el administrador puede eliminar.");
+    return;
+  }
   residentes.splice(index, 1);
   localStorage.setItem("residentes", JSON.stringify(residentes));
-  renderTable();
+  mostrarResidentes();
 }
 
-// Limpiar formulario
-function limpiarFormulario() {
-  document.getElementById("cedula").value = "";
-  document.getElementById("nombre").value = "";
-  document.getElementById("torre").value = "";
-  document.getElementById("apartamento").value = "";
-  document.getElementById("tipo").value = "Propietario";
-  document.getElementById("vehiculo").value = "";
-  document.getElementById("placa").value = "";
-  document.getElementById("propietario").value = "Sí";
+// ==========================
+// CRUD Pagos
+// ==========================
+let pagos = JSON.parse(localStorage.getItem("pagos")) || [];
+
+function mostrarPagos() {
+  const tabla = document.getElementById("tablaPagos");
+  if (!tabla) return;
+
+  tabla.innerHTML = "";
+  pagos.forEach((pago, index) => {
+    let fila = `
+      <tr>
+        <td>${pago.nombre}</td>
+        <td>${pago.apartamento}</td>
+        <td>${pago.mes}</td>
+        <td>${pago.estado}</td>
+        <td>${pago.deuda || "Ninguna"}</td>
+        ${getRol() === "Administrador" ? `
+        <td>
+          <button onclick="editarPago(${index})">Editar</button>
+          <button onclick="eliminarPago(${index})">Eliminar</button>
+        </td>` : ""}
+      </tr>
+    `;
+    tabla.innerHTML += fila;
+  });
 }
 
-// ====== Filtros de búsqueda ======
-function buscar() {
-  const filtro = document.getElementById("filtro").value.toLowerCase();
-  const valor = document.getElementById("valor-busqueda").value.toLowerCase();
-
-  const tbody = document.querySelector("#tabla-residentes tbody");
-  tbody.innerHTML = "";
-
-  residentes
-    .filter(r => r[filtro].toLowerCase().includes(valor))
-    .forEach((residente, index) => {
-      let row = `
-        <tr>
-          <td>${residente.cedula}</td>
-          <td>${residente.nombre}</td>
-          <td>${residente.torre}</td>
-          <td>${residente.apartamento}</td>
-          <td>${residente.tipo}</td>
-          <td>${residente.vehiculo}</td>
-          <td>${residente.placa}</td>
-          <td>${residente.propietario}</td>
-          <td>
-            <div class="actions">
-              <button class="edit" onclick="editResidente(${index})">✏️</button>
-              <button class="delete" onclick="deleteResidente(${index})">🗑️</button>
-            </div>
-          </td>
-        </tr>
-      `;
-      tbody.innerHTML += row;
-    });
-
-  aplicarRol();
-}
-
-// ====== Roles ======
-function aplicarRol() {
-  const rol = localStorage.getItem("rol");
-
-  if (rol === "vigilancia") {
-    document.querySelectorAll(".actions button").forEach(btn => {
-      btn.disabled = true;
-      btn.style.opacity = "0.5";
-      btn.style.cursor = "not-allowed";
-    });
-    document.getElementById("btn-agregar").disabled = true;
+function agregarPago(event) {
+  event.preventDefault();
+  if (getRol() !== "Administrador") {
+    alert("Solo el administrador puede registrar pagos.");
+    return;
   }
+
+  const nuevo = {
+    nombre: document.getElementById("pagoNombre").value,
+    apartamento: document.getElementById("pagoApartamento").value,
+    mes: document.getElementById("pagoMes").value,
+    estado: document.getElementById("pagoEstado").value,
+    deuda: document.getElementById("pagoDeuda").value
+  };
+
+  pagos.push(nuevo);
+  localStorage.setItem("pagos", JSON.stringify(pagos));
+  mostrarPagos();
+  document.getElementById("formPagos").reset();
 }
 
-// ====== Inicializar ======
+function editarPago(index) {
+  const p = pagos[index];
+  document.getElementById("pagoNombre").value = p.nombre;
+  document.getElementById("pagoApartamento").value = p.apartamento;
+  document.getElementById("pagoMes").value = p.mes;
+  document.getElementById("pagoEstado").value = p.estado;
+  document.getElementById("pagoDeuda").value = p.deuda;
+
+  eliminarPago(index);
+}
+
+function eliminarPago(index) {
+  if (getRol() !== "Administrador") {
+    alert("Solo el administrador puede eliminar pagos.");
+    return;
+  }
+  pagos.splice(index, 1);
+  localStorage.setItem("pagos", JSON.stringify(pagos));
+  mostrarPagos();
+}
+
+// ==========================
+// Al cargar cada página
+// ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("tabla-residentes")) {
-    renderTable();
-  }
+  if (document.getElementById("tablaResidentes")) mostrarResidentes();
+  if (document.getElementById("tablaPagos")) mostrarPagos();
 });
