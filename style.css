@@ -1,191 +1,194 @@
-/* ====== Estilos generales ====== */
-body, html {
+/* 🎨 Reset básico */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f6f9;
-  color: #333;
-  height: 100%;
 }
 
-/* Fondo con la imagen difuminada */
-.fondo {
-  background: url("../img/fondo.jpg") no-repeat center center fixed;
+body {
+  background: url("../images/fondo.png") no-repeat center center fixed;
   background-size: cover;
-  position: relative;
-}
-
-.fondo::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 0;
-}
-
-/* Contenedor login */
-.login-container {
-  position: relative;
-  z-index: 1;
-  width: 350px;
-  margin: 10% auto;
+  backdrop-filter: blur(4px);
+  min-height: 100vh;
   padding: 20px;
-  background: white;
+  color: #222;
+}
+
+/* 🔹 Encabezado */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 15px 25px;
   border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-  text-align: center;
-}
-
-.login-container h1 {
-  margin-bottom: 10px;
-  color: #2c3e50;
-}
-
-.login-container p {
   margin-bottom: 20px;
-  color: #555;
 }
 
-.login-container select,
-.login-container button {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+header h1 {
+  font-size: 1.6rem;
+}
+
+header button {
+  background: #ff4b5c;
+  border: none;
+  color: white;
+  padding: 8px 15px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.login-container button {
-  background: linear-gradient(135deg, #2980b9, #6dd5fa);
+header button:hover {
+  background: #e03e4d;
+}
+
+/* 🔍 Sección de búsqueda */
+.busqueda {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.busqueda h2 {
+  margin-bottom: 10px;
+}
+
+.busqueda select,
+.busqueda input,
+.busqueda button {
+  padding: 8px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.busqueda button {
+  background: #0077ff;
   color: white;
   border: none;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.login-container button:hover {
-  background: linear-gradient(135deg, #2575fc, #6a11cb);
+.busqueda button:hover {
+  background: #005ecc;
 }
 
-/* ====== Estilos CRUD residentes ====== */
-.container {
-  max-width: 1200px;
-  margin: 50px auto;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.container h2 {
-  text-align: center;
+/* 📋 Formulario */
+.formulario {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
   margin-bottom: 20px;
-  color: #2c3e50;
 }
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.formulario h2 {
   margin-bottom: 15px;
 }
 
-.controls input, .controls select, .controls button {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.formulario input,
+.formulario select,
+.formulario button {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
 }
 
-.controls button {
-  background: #27ae60;
+.formulario button {
+  background: #28a745;
   color: white;
   border: none;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.controls button:hover {
-  background: #219150;
+.formulario button:hover {
+  background: #218838;
 }
 
-/* Tabla */
+/* 📊 Tabla */
+.tabla {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.tabla h2 {
+  margin-bottom: 15px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
 }
 
-table thead {
-  background: #34495e;
+thead {
+  background: #0077ff;
   color: white;
 }
 
-table th, table td {
+th, td {
   padding: 10px;
+  border: 1px solid #ddd;
   text-align: center;
-  border-bottom: 1px solid #ddd;
 }
 
-table tr:nth-child(even) {
+tbody tr:nth-child(even) {
   background: #f9f9f9;
 }
 
-.actions button {
-  border: none;
-  padding: 6px 10px;
+tbody tr:hover {
+  background: #e6f0ff;
+}
+
+/* Botones de acciones */
+.acciones button {
   margin: 2px;
+  padding: 5px 8px;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
-}
-
-.actions .edit {
-  background: #f39c12;
   color: white;
+  font-size: 0.9rem;
 }
 
-.actions .delete {
-  background: #e74c3c;
-  color: white;
+.acciones .editar {
+  background: #ffc107;
 }
 
-/* ====== Formulario de contacto ====== */
-.contact-form {
-  max-width: 600px;
-  margin: 50px auto;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.acciones .editar:hover {
+  background: #e0a800;
 }
 
-.contact-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2c3e50;
+.acciones .eliminar {
+  background: #dc3545;
 }
 
-.contact-form label {
-  display: block;
-  margin: 10px 0 5px;
+.acciones .eliminar:hover {
+  background: #c82333;
 }
 
-.contact-form input, 
-.contact-form textarea, 
-.contact-form button {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
 
-.contact-form button {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+  .formulario input, 
+  .formulario select, 
+  .formulario button {
+    width: 100%;
+  }
 
-.contact-form button:hover {
-  background: linear-gradient(135deg, #2575fc, #6dd5fa);
+  th, td {
+    font-size: 0.85rem;
+  }
 }
