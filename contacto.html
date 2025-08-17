@@ -4,25 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contacto - GLORIA III</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
 </head>
 <body>
-  <div class="overlay">
-    <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="propietarios.html">Propietarios</a></li>
-        <li><a href="pagos.html">Pagos</a></li>
-        <li><a href="vehiculos.html">Vehículos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
-    <main>
-      <h1>Contacto</h1>
-      <p>Correo: administracion@gloria3.com</p>
-      <p>Teléfono: +57 300 000 0000</p>
-    </main>
-  </div>
+  <header>
+    <h1>Contacto - PQRS</h1>
+    <button onclick="window.location.href='index.html'">🏠 Volver</button>
+  </header>
+
+  <!-- 📩 Formulario de PQRS -->
+  <section class="formulario">
+    <h2>Déjanos tu PQRS</h2>
+    <form id="pqrsForm">
+      <input type="text" id="nombre" placeholder="Nombre completo" required>
+      <input type="email" id="correo" placeholder="Correo electrónico" required>
+      <input type="tel" id="telefono" placeholder="Teléfono o celular">
+      <input type="text" id="torre" placeholder="Torre">
+      <input type="text" id="apartamento" placeholder="Apartamento">
+
+      <label for="tipoPQRS"><b>Tipo de solicitud:</b></label>
+      <select id="tipoPQRS" required>
+        <option value="">Seleccione...</option>
+        <option value="Petición">Petición</option>
+        <option value="Queja">Queja</option>
+        <option value="Reclamo">Reclamo</option>
+        <option value="Sugerencia">Sugerencia</option>
+      </select>
+
+      <label for="descripcion"><b>Descripción:</b></label>
+      <textarea id="descripcion" rows="6" placeholder="Escribe aquí tu PQRS..." required></textarea>
+
+      <button type="submit">📨 Enviar PQRS</button>
+    </form>
+  </section>
+
+  <!-- 📊 Tabla de PQRS (solo Administrador) -->
+  <section class="tabla" id="tablaPQRS" style="display:none;">
+    <h2>Listado de PQRS Recibidas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Torre</th>
+          <th>Apartamento</th>
+          <th>Tipo</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody id="pqrsTablaBody">
+        <!-- Se llenará dinámicamente -->
+      </tbody>
+    </table>
+  </section>
 </body>
 </html>
