@@ -1,72 +1,81 @@
-// js/usuarios.js
-document.addEventListener("DOMContentLoaded", () => {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    const userList = document.getElementById("userList");
-    const btnAddUser = document.getElementById("btnAddUser");
+// 🔹 Simulación de sesión actual (esto viene del login)
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if (!user) {
-        alert("Debes iniciar sesión");
-        window.location.href = "login.html";
-        return;
-    }
+// Si no hay usuario logueado, redirige al login
+if (!currentUser) {
+    window.location.href = "login.html";
+}
 
-    // Lista simulada de usuarios vigilantes
-    let usuarios = [
-        { id: 1, nombre: "Carlos", estado: "Activo" },
-        { id: 2, nombre: "María", estado: "Bloqueado" }
-    ];
+// 🔹 Lista simulada de usuarios vigilantes
+let usuarios = [
+    { id: 1, nombre: "Carlos Vigilante", activo: true },
+    { id: 2, nombre: "Pedro Vigilante", activo: false }
+];
 
-    function renderUsuarios() {
-        userList.innerHTML = "";
+// Renderizar lista de usuarios
+function renderUsuarios() {
+    const lista = document.getElementById("userList");
+    lista.innerHTML = "";
 
-        usuarios.forEach(u => {
-            const li = document.createElement("li");
-            li.textContent = `${u.nombre} - ${u.estado}`;
+    usuarios.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = `${user.nombre} - ${user.activo ? "✅ Activo" : "⛔ Bloqueado"}`;
 
-            if (user.role === "admin") {
-                const btnEliminar = document.createElement("button");
-                btnEliminar.textContent = "Eliminar";
-                btnEliminar.onclick = () => eliminarUsuario(u.id);
+        // Solo ADMIN ve los botones de gestión
+        if (currentUser.rol === "admin") {
+            const btnToggle = document.createElement("button");
+            btnToggle.textContent = user.activo ? "Bloquear" : "Activar";
+            btnToggle.onclick = () => toggleEstado(user.id);
 
-                const btnBloquear = document.createElement("button");
-                btnBloquear.textContent = (u.estado === "Activo") ? "Bloquear" : "Activar";
-                btnBloquear.onclick = () => toggleEstado(u.id);
+            const btnDelete = document.createElement("button");
+            btnDelete.textContent = "Eliminar";
+            btnDelete.onclick = () => eliminarUsuario(user.id);
 
-                li.appendChild(btnEliminar);
-                li.appendChild(btnBloquear);
-            }
+            li.appendChild(btnToggle);
+            li.appendChild(btnDelete);
+        }
 
-            userList.appendChild(li);
-        });
-    }
+        lista.appendChild(li);
+    });
+}
 
-    function eliminarUsuario(id) {
-        usuarios = usuarios.filter(u => u.id !== id);
-        renderUsuarios();
-    }
-
-    function toggleEstado(id) {
-        usuarios = usuarios.map(u => {
-            if (u.id === id) {
-                u.estado = (u.estado === "Activo") ? "Bloqueado" : "Activo";
-            }
-            return u;
-        });
-        renderUsuarios();
-    }
-
-    if (user.role === "admin") {
-        btnAddUser.style.display = "inline-block";
-        btnAddUser.addEventListener("click", () => {
-            const nombre = prompt("Nombre del nuevo vigilante:");
-            if (nombre) {
-                usuarios.push({ id: Date.now(), nombre, estado: "Activo" });
-                renderUsuarios();
-            }
-        });
-    } else {
-        btnAddUser.style.display = "none"; // Ocultar botón para vigilante
-    }
-
+// Cambiar estado (bloquear / activar)
+function toggleEstado(id) {
+    usuarios = usuarios.map(u =>
+        u.id === id ? { ...u, activo: !u.activo } : u
+    );
     renderUsuarios();
+}
+
+// Eliminar usuario
+function eliminarUsuario(id) {
+    usuarios = usuarios.filter(u => u.id !== id);
+    renderUsuarios();
+}
+
+// Agregar usuario (solo admin)
+function agregarUsuario() {
+    const nombre = prompt("Nombre del nuevo vigilante:");
+    if (nombre) {
+        usuarios.push({
+            id: usuarios.length + 1,
+            nombre,
+            activo: true
+        });
+        renderUsuarios();
+    }
+}
+
+// Vincular botón de agregar
+document.addEventListener("DOMContentLoaded", () => {
+    renderUsuarios();
+
+    if (currentUser.rol === "admin") {
+        const btnAdd = document.getElementById("btnAddUser");
+        if (btnAdd) btnAdd.addEventListener("click", agregarUsuario);
+    } else {
+        // Ocultar botón si no es admin
+        const btnAdd = document.getElementById("btnAddUser");
+        if (btnAdd) btnAdd.style.display = "none";
+    }
 });
