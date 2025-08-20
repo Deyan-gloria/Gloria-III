@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GLORIA III - Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://kit.fontawesome.com/a2d9b6d6c1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<main class="centered-card">
+  <h1>GLORIA III</h1>
+  <form id="loginForm">
+    <label>Usuario</label>
+    <input id="user" required />
+    <label>Contraseña</label>
+    <input id="pass" type="password" required />
+    <button type="submit">Ingresar</button>
+  </form>
+  <p class="muted">Usuario demo: admin / clave: admin</p>
+</main>
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  // simple demo login
+  const u = document.getElementById('user').value;
+  const p = document.getElementById('pass').value;
+  if ((u==='admin' && p==='admin') || (u==='vigilante' && p==='vigilante')) {
+    localStorage.setItem('gloria_user', u);
+    location.href = 'dashboard.html';
+  } else {
+    alert('Credenciales inválidas. Usa admin/admin o vigilante/vigilante como demo.');
+  }
+});
+</script>
+</body>
+</html>
