@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residentes - GLORIA III</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body data-guard="any">
+  <nav class="nav">
+    <div class="brand">GLORIA <span>III</span></div>
+    <button class="menu-toggle" aria-label="Abrir menú"><i class="fa fa-bars"></i></button>
+    <ul class="links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="residentes.html">Residentes</a></li>
+      <li><a href="pagos.html">Pagos</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+
+<header class="page-header">
+  <h2><i class="fa fa-people-roof"></i> Residentes</h2>
+  <input type="text" id="buscador" class="search" placeholder="Buscar por placa, apartamento, torre, nombre, apellido o cédula…">
+</header>
+<main class="container">
+  <div class="table-wrap">
+    <table id="tablaResidentes" class="table">
+      <thead>
+        <tr>
+          <th>Placa</th>
+          <th>Apartamento</th>
+          <th>Torre</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Cédula</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ABC123</td><td>101</td><td>1</td><td>Carlos</td><td>Pérez</td><td>123456789</td></tr>
+        <tr><td>XYZ987</td><td>202</td><td>3</td><td>Ana</td><td>Gómez</td><td>987654321</td></tr>
+        <tr><td>JKL456</td><td>305</td><td>5</td><td>Jorge</td><td>Martínez</td><td>112233445</td></tr>
+        <tr><td>GHI321</td><td>404</td><td>2</td><td>Luisa</td><td>Torres</td><td>556677889</td></tr>
+        <tr><td>MNO852</td><td>120</td><td>4</td><td>Pedro</td><td>López</td><td>102938475</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>
