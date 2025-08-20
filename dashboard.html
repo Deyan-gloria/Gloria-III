@@ -4,8 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Dashboard - GLORIA III</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <script defer src="js/common.js"></script>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://kit.fontawesome.com/a2d9b6d6c1.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -43,12 +42,28 @@
   </div>
 </main>
 
+<script src="js/login.js"></script>
 <script>
-document.getElementById('logoutBtn')?.addEventListener('click', function(e){
-  e.preventDefault();
-  localStorage.removeItem('gloria_user');
-  location.href = 'index.html';
+// ✅ Verificar sesión al cargar
+window.addEventListener("DOMContentLoaded", () => {
+  const user = localStorage.getItem("gloria_user");
+  if (!user) {
+    window.location.href = "login.html";
+  }
 });
+
+// ✅ Logout unificado
+function cerrarSesion() {
+  localStorage.removeItem("gloria_user");
+  window.location.href = "login.html";
+}
+
+document.getElementById("logoutBtn")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  cerrarSesion();
+});
+document.getElementById("logoutTop")?.addEventListener("click", cerrarSesion);
 </script>
+
 </body>
 </html>
