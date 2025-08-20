@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PQRS - GLORIA III</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/common.js"></script>
+  <script src="https://kit.fontawesome.com/a2d9b6d6c1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">GLORIA III</div>
+  <div class="nav-actions">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="usuarios.html">Usuarios</a>
+    <a href="residentes.html">Residentes</a>
+    <a href="pagos.html">Pagos</a>
+    <a href="contacto.html">PQRS</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="card">
+    <h2>Formulario PQRS</h2>
+    <form id="pqrsForm" class="form-grid">
+      <label>Tipo</label>
+      <select id="pqrs_tipo"><option value="P">P</option><option value="Q">Q</option><option value="R">R</option><option value="S">S</option></select>
+      <label>Nombre</label><input id="pqrs_nombre" required />
+      <label>Teléfono / Celular</label><input id="pqrs_tel" />
+      <label>Mensaje</label><textarea id="pqrs_msg"></textarea>
+      <div class="actions-row"><button type="submit" class="btn primary">Enviar</button></div>
+    </form>
+
+    <h3>Mensajes</h3>
+    <table id="tblPQRS" class="table"><thead><tr><th>Tipo</th><th>Nombre</th><th>Tel</th><th>Mensaje</th><th>Acciones</th></tr></thead><tbody></tbody></table>
+  </div>
+</main>
+
+<script src="js/contacto.js"></script>
+
+<script>
+document.getElementById('logoutBtn')?.addEventListener('click', function(e){
+  e.preventDefault();
+  localStorage.removeItem('gloria_user');
+  location.href = 'index.html';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard - GLORIA III</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/common.js"></script>
+  <script src="https://kit.fontawesome.com/a2d9b6d6c1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">GLORIA III</div>
+  <div class="nav-actions">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="usuarios.html">Usuarios</a>
+    <a href="residentes.html">Residentes</a>
+    <a href="pagos.html">Pagos</a>
+    <a href="contacto.html">PQRS</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="card">
+    <div class="card-row">
+      <div>
+        <h2>Bienvenido a GLORIA III</h2>
+        <p>Accede a los módulos mediante la barra superior.</p>
+      </div>
+      <div class="card-actions">
+        <button onclick="history.back()" class="btn ghost">← Retornar</button>
+        <button id="logoutTop" class="btn">Logout</button>
+      </div>
+    </div>
+    <div class="grid-tiles">
+      <a class="tile" href="residentes.html"><i class="fa-solid fa-users"></i><span>Residentes</span></a>
+      <a class="tile" href="pagos.html"><i class="fa-solid fa-file-invoice-dollar"></i><span>Pagos</span></a>
+      <a class="tile" href="usuarios.html"><i class="fa-solid fa-user-shield"></i><span>Usuarios</span></a>
+      <a class="tile" href="contacto.html"><i class="fa-solid fa-envelope"></i><span>PQRS</span></a>
+    </div>
+  </div>
+</main>
+
+<script>
+document.getElementById('logoutBtn')?.addEventListener('click', function(e){
+  e.preventDefault();
+  localStorage.removeItem('gloria_user');
+  location.href = 'index.html';
+});
+</script>
+</body>
+</html>

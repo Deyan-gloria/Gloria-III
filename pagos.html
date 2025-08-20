@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagos - GLORIA III</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/common.js"></script>
+  <script src="https://kit.fontawesome.com/a2d9b6d6c1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="brand">GLORIA III</div>
+  <div class="nav-actions">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="usuarios.html">Usuarios</a>
+    <a href="residentes.html">Residentes</a>
+    <a href="pagos.html">Pagos</a>
+    <a href="contacto.html">PQRS</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="card">
+    <h2>Pagos</h2>
+    <div class="row">
+      <select id="f_concepto">
+        <option value="">Todos los conceptos</option>
+        <option value="admin">Administración</option>
+        <option value="arriendo">Arriendo</option>
+        <option value="parqueo">Parqueo</option>
+        <option value="otro">Otro</option>
+      </select>
+      <select id="f_estado">
+        <option value="">Todos los estados</option>
+        <option value="al-dia">Al día</option>
+        <option value="en-mora">En mora</option>
+      </select>
+      <button id="nuevoPago" class="btn primary">Nuevo pago</button>
+    </div>
+    <table id="tblPagos" class="table">
+      <thead><tr><th>Apto</th><th>Torre</th><th>Concepto</th><th>Monto</th><th>Fecha</th><th>Estado</th><th>Acciones</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<script src="js/pagos.js"></script>
+
+<script>
+document.getElementById('logoutBtn')?.addEventListener('click', function(e){
+  e.preventDefault();
+  localStorage.removeItem('gloria_user');
+  location.href = 'index.html';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GLORIA III - Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/common.js"></script>
+  <script src="https://kit.fontawesome.com/a2d9b6d6c1.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<main class="centered-card">
+  <h1>GLORIA III</h1>
+  <form id="loginForm" class="form-grid">
+    <label>Usuario</label>
+    <input id="user" placeholder="admin o vigilante" required />
+    <label>Contraseña</label>
+    <input id="pass" type="password" placeholder="admin" required />
+    <div class="actions-row">
+      <button type="submit" class="btn primary">Ingresar</button>
+      <button type="button" id="demoBtn" class="btn ghost">Usar demo</button>
+    </div>
+  </form>
+  <p class="muted">Usuario demo: <strong>admin</strong> / clave: <strong>admin</strong></p>
+  <p class="muted">Usuario demo: <strong>vigilante</strong> / clave: <strong>vigilante</strong></p>
+</main>
+
+<script>
+document.getElementById('loginForm')?.addEventListener('submit', function(e){
+  e.preventDefault();
+  const u = document.getElementById('user').value.trim();
+  const p = document.getElementById('pass').value.trim();
+  if ((u==='admin' && p==='admin') || (u==='vigilante' && p==='vigilante')) {
+    localStorage.setItem('gloria_user', u);
+    location.href = 'dashboard.html';
+  } else {
+    alert('Credenciales inválidas. Usa admin/admin o vigilante/vigilante como demo.');
+  }
+});
+document.getElementById('demoBtn')?.addEventListener('click', function(){
+  document.getElementById('user').value = 'admin';
+  document.getElementById('pass').value = 'admin';
+});
+</script>
+</body>
+</html>
