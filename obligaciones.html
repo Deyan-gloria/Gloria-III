@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obligaciones - Gloria III</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/common.js"></script>
+  <script defer src="js/obligaciones.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Obligaciones</h1>
+    <button onclick="logout()">Cerrar sesión</button>
+  </header>
+  <main>
+    <form id="obligForm">
+      <input type="text" placeholder="Nombre y Apellidos" required>
+      <input type="text" placeholder="Número de Cédula" required>
+      <input type="text" placeholder="Apartamento" required>
+      <input type="text" placeholder="Torre" required>
+      <select>
+        <option>Administración</option>
+        <option>Arriendo</option>
+        <option>Parqueo</option>
+        <option>Otro</option>
+      </select>
+      <input type="number" placeholder="Monto por cancelar" required>
+      <select>
+        <option>Pendiente</option>
+        <option>Pagado</option>
+      </select>
+      <input type="date" placeholder="Fecha último pago">
+      <select>
+        <option>Diario</option>
+        <option>Semanal</option>
+        <option>Quincenal</option>
+        <option>Mensual</option>
+        <option>Anual</option>
+      </select>
+      <div class="crud-buttons">
+        <button type="button" onclick="crearObligacion()">Crear</button>
+        <button type="button" onclick="editarObligacion()">Editar</button>
+        <button type="button" onclick="eliminarObligacion()">Eliminar</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Modal contraseña -->
+  <div id="modalClave" class="modal">
+    <div class="modal-content">
+      <p>Ingrese la contraseña de seguridad:</p>
+      <input type="password" id="claveSeguridad">
+      <button onclick="validarClave()">Validar</button>
+      <button onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</body>
+</html>
