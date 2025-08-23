@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('../img/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+.login-body::before, .dashboard-body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(6px);
+}
+.login-container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 20%;
+}
+.hidden { display: none; }
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 10px;
+}
+header nav {
+  display: flex;
+  justify-content: space-between;
+  background: #333;
+  padding: 10px;
+}
+header nav a, header nav button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.search-bar { padding: 10px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
