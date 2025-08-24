@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conjunto Residencial Gloria III</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body class="login-body">
+  <div class="bg-overlay"></div>
+  
+  <header class="topbar">
+    <button id="loginBtn" class="btn top-right">Ingresar</button>
+  </header>
+
+  <!-- Modal de Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <input type="password" id="password" placeholder="Clave de acceso">
+      <button id="accessBtn" class="btn">Ingresar</button>
+      <p id="msg"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Dirección: Carrera 9 #2Sur - 124, Montería</p>
+    <p>Tel: xxxxxxxxxx | Correo: xxxxxxx</p>
+    <p>&copy; 2025 Conjunto Residencial Gloria III</p>
+  </footer>
+
+  <script src="js/login.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+</html>
